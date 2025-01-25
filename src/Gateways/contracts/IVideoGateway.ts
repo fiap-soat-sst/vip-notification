@@ -1,5 +1,7 @@
 import { Either } from '../../@Shared/Either'
+import Video from '../../Entities/Video'
 
 export interface IVideoGateway {
-    findVideo(email: string, videoId: string): Promise<Either<Error, any>>
+    createVideoExample(): Promise<Either<Error, string>>
+    findVideo(email: string, videoId: string): Promise<Either<Error, Video>>
 }

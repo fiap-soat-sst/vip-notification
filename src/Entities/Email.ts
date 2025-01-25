@@ -11,7 +11,7 @@ export class Email implements EmailDTO {
   readonly data: EmailDTO["data"];
 
   constructor(input: EmailDTO | InputEmailDTO) {
-    this.id = input["id"] || randomUUID();
+    this.id = 'id' in input ? input.id : randomUUID();
     this.sender = input.sender;
     this.receiver = input.receiver;
     this.type = input.type;

@@ -2,7 +2,6 @@ import express, { Express } from 'express'
 import swaggerUi from 'swagger-ui-express'
 // import swaggerDocument from '../../../swagger.json'
 import VerifyAuthToken from '../../UseCases/Auth/verifyAuthToken.usecase'
-import { authMiddleware } from './Auth/AuthMiddleware'
 import dotenv from 'dotenv'
 import NotificationRoutes from './Routes/NotificationRoutes'
 import { RouteTypeEnum } from '../../Entities/Enums/RouteType'
@@ -18,8 +17,6 @@ const jwtSecret = process.env.JWT_SECRET || ''
 const verifyAuthToken = new VerifyAuthToken(jwtSecret)
 
 const notificationRoutes = new NotificationRoutes()
-
-app.use('/api', authMiddleware(verifyAuthToken))
 
 app.use(
     `/${RouteTypeEnum.PUBLIC}/docs`,

@@ -26,8 +26,8 @@ export class SendEmailNotificationUseCase implements ISendEmailNotificationUseCa
       receiver: notification.email,
       type: notification.status,
       data: {
-        videoTitle: video.value.title,
-        urlVideo: video.value.url,
+        videoTitle: video.value.name,
+        urlVideo: video.value.compressService?.url || video.value.managerService?.url,
         errorMessage: notification.message,
       },
     });
