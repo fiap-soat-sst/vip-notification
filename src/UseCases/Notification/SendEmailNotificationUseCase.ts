@@ -24,7 +24,7 @@ export class SendEmailNotificationUseCase implements ISendEmailNotificationUseCa
     const email = new Email({
       sender: this.sender,
       receiver: notification.email,
-      type: notification.status,
+      type: notification.type,
       data: {
         videoTitle: video.value.name,
         urlVideo: video.value.compressService?.url || video.value.managerService?.url,

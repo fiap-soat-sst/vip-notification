@@ -8,9 +8,9 @@ export default class NotificationController {
   ) {}
 
   async sendEmailNotification(req: Request, res: Response): Promise<void> {
-    const { videoId, email, status, message } = req.body;
+    const { videoId, email, type, message } = req.body;
 
-    if (!videoId || !email || !status || !message) {
+    if (!videoId || !email || !type || !message) {
       res.status(400).json({
         message: "Missing required fields: " + videoId ? "" : "videoId, " + email ? "" : "email, " + status ? "" : "status, " + message ? "" : "message",
       });
@@ -20,7 +20,7 @@ export default class NotificationController {
     const result = await this.sendEmailNotificationUseCase.execute({
       videoId,
       email,
-      status,
+      type,
       message,
     });
 

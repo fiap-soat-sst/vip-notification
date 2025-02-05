@@ -1,4 +1,4 @@
-export enum NotificationStatusEnum {
+export enum NotificationTypeEnum {
     SUCCESS = 'Sucesso',
     ERROR = 'Erro'
 }
