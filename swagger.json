@@ -1,0 +1,92 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "VIP Notification Service",
+        "description": "Documentation for VIP Notification Service",
+        "version": "1.0.0",
+        "contact": {
+            "name": "API Support Team",
+            "url": "https://github.com/fiap-soat-sst/vip-notification/issues"
+        }
+    },
+    "servers": [
+        {
+            "url": "/api",
+            "description": "Base path"
+        }
+    ],
+    "paths": {
+        "/notification/send-email": {
+            "post": {
+                "summary": "Send email notificaton",
+                "tags": ["Notification"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/InputNotificationDTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Products found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InputNotificationDTO"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request: Unable to send email"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "tokenAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Token"
+            }
+        },
+        "schemas": {
+            "InputNotificationDTO": {
+                "type": "object",
+                "properties": {
+                    "videoId": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "SUCCESS",
+                            "ERROR"
+                        ],
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": ["videoId", "email", "type", "message"]
+            }
+        }
+    },
+    "security": [
+        {
+            "tokenAuth": []
+        }
+    ]
+}
