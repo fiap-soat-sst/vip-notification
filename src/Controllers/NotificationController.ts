@@ -12,7 +12,7 @@ export default class NotificationController {
 
     if (!videoId || !email || !type || !message) {
       res.status(400).json({
-        message: "Missing required fields: " + videoId ? "" : "videoId, " + email ? "" : "email, " + status ? "" : "status, " + message ? "" : "message",
+        message: "Missing required fields: " + (videoId ? "" : "videoId, ") + (email ? "" : "email, ") + (type ? "" : "type, ") + (message ? "" : "message"),
       });
       return;
     }

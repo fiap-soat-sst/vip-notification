@@ -6,7 +6,9 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export class EmailAdapter implements IEmailAdapter {
-    private transporter = nodemailer.createTransport({
+    private transporter: nodemailer.Transporter
+    constructor() {
+    this.transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.EMAIL_PORT ? parseInt(process.env.EMAIL_PORT) : 587,
         secure: false,
@@ -15,7 +17,7 @@ export class EmailAdapter implements IEmailAdapter {
             pass: process.env.EMAIL_PASSWORD,
         },
         
-    })
+    })}
 
     async sendEmail(email: EmailDTO): Promise<Either<Error, string>> {
         try {
