@@ -1,6 +1,6 @@
 import express, { Express } from 'express'
 import swaggerUi from 'swagger-ui-express'
-// import swaggerDocument from '../../../swagger.json'
+import swaggerDocument from '../../../swagger.json'
 import VerifyAuthToken from '../../UseCases/Auth/verifyAuthToken.usecase'
 import dotenv from 'dotenv'
 import NotificationRoutes from './Routes/NotificationRoutes'
@@ -21,9 +21,9 @@ const notificationRoutes = new NotificationRoutes()
 app.use(
     `/${RouteTypeEnum.PUBLIC}/docs`,
     swaggerUi.serve,
-    // swaggerUi.setup(swaggerDocument, {
-    //     swaggerOptions: { url: `${process.env.SWAGGER_URL}` },
-    // })
+    swaggerUi.setup(swaggerDocument, {
+        swaggerOptions: { url: `${process.env.SWAGGER_URL}` },
+    })
 )
 app.use(getApiRoute('notification'), notificationRoutes.buildRouter())
 
