@@ -1,10 +1,10 @@
-import { NotificationStatusEnum } from "../Enums/NotificationStatusEnum"
+import { NotificationTypeEnum } from "../Enums/NotificationTypeEnum"
 
 export interface NotificationDTO {
     id: string
     videoId: string
     email: string
-    status: keyof typeof NotificationStatusEnum
+    type: keyof typeof NotificationTypeEnum
     message: string
 }
 
