@@ -10,4 +10,4 @@ export interface EmailDTO {
     body: string
 }
 
-export type InputEmailDTO = Omit<EmailDTO, 'id' | 'subject' | 'body'> 
+export type InputEmailDTO = Omit<EmailDTO, 'id' | 'subject' > 

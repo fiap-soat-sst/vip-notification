@@ -5,6 +5,7 @@ import { InputNotificationDTO } from "../../Entities/DTOs/Notification.dto";
 import { Either, isLeft, Left, Right } from "../../@Shared/Either";
 import { IEmailAdapter } from "../../External/Email/IEmailAdapter";
 import { IVideoGateway } from "../../Gateways/contracts/IVideoGateway";
+import { loadTemplate } from "../../External/Email/Templates/LoadTemplate.util";
 
 export class SendEmailNotificationUseCase implements ISendEmailNotificationUseCase {
   private sender = process.env.EMAIL_USER!;
@@ -21,6 +22,17 @@ export class SendEmailNotificationUseCase implements ISendEmailNotificationUseCa
         return Left(new Error('Video not found'));
     }
 
+    let emailTemplate = '';
+
+    switch (notification.type) {
+      case 'SUCCESS':
+        emailTemplate = loadTemplate('SuccessEmail.html');
+        break;
+      case 'ERROR':
+        emailTemplate = loadTemplate('ErrorEmail.html');
+        break;
+    }
+
     const email = new Email({
       sender: this.sender,
       receiver: notification.email,
@@ -30,6 +42,7 @@ export class SendEmailNotificationUseCase implements ISendEmailNotificationUseCa
         urlVideo: video.value.compressService?.url || video.value.managerService?.url,
         errorMessage: notification.message,
       },
+      body: emailTemplate
     });
 
     const emailResponse = await this.emailAdapter.sendEmail(email);
